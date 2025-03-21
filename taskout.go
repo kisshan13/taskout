@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"sync"
 	"time"
-
-	"github.com/google/uuid"
 )
 
 // TaskManager is responsible for managing tasks.
@@ -122,7 +120,7 @@ func (tm *TaskManager) SetTimeout(task func(ctx context.Context), duration time.
 		oneShot:   true,
 	}
 
-	taskId := uuid.NewString()
+	taskId, _ := generateId()
 
 	tm.addTask(TaskID(taskId), t)
 
@@ -146,7 +144,7 @@ func (tm *TaskManager) SetInterval(task func(context.Context), interval time.Dur
 		oneShot:   false,
 	}
 
-	taskId := uuid.NewString()
+	taskId, _ := generateId()
 
 	tm.addTask(TaskID(taskId), t)
 
